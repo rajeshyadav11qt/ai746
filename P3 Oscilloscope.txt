@@ -1,0 +1,50 @@
+Connections:
+
+ADS1115 ADC	Rasp
+GND	=	pin 9
+VDD	=	pin 17
+SCL	=	Pin 5
+SDA	=	Pin 3
+
+Hardware Requirements:
+	Raspberry Pi
+	ADS1115 ADC 
+	Breadboard
+	Jumper Wires
+
+
+
+Commands:
+
+sudo raspi-config
+Enable I2C Interface
+
+sudo pip3 install adafruit-circuitpython-ads1x15
+sudo pip3 install adafruit-blinka
+
+git clone https://github.com/adafruit/Adafruit_CircuitPython_ADS1x15
+
+(ye link brower me dalo, if command not working)
+
+Adafruit_CircuitPython_ADS1x15 ->Examples->Ads1x15_simpletest.py
+(seacrh file or write code:)
+
+
+Code: 
+import time
+import board
+import busio
+import adafruit_ads1x15.ads1015 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
+
+
+i2c = busio.I2C(board.SCL, board.SDA)
+
+ads = ADS.ADS1015(i2c) 
+
+chan = AnalogIn(ads, ADS.P0)
+print("{:>5}\t{:>5}".format("raw", "v"))
+
+while True:
+print("{:>5}\t{:>5.3f}".format(chan.value, chan. voltage)) 
+time.sleep(0.5)
